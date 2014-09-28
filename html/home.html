@@ -2,37 +2,32 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
-    <title></title>
+    <title>title</title>
+    <script src="../js/lib/seajs/2.2.0/sea.js" id="seajsnode"></script>
+    <script>
+        var global = {
+            debug: true,
+            version: '1.0.0'
+        };
+        window.seajs &&
+        seajs.config({
+            preload: [!global.debug ? '../css/home.css' : '../src/home.css', 'log'],
+            base: '../js',
+            debug: !!global.debug,
+            map: [[/^(.*\.(?:css|js))(.*)$/i, '$1?v='+global.version]],
+            alias: {
+                log: 'util/seajs-log/1.0.1/seajs-log'
+            }
+        })
+        .use(
+            !global.debug ?
+            'app/demo/'+global.version+'/home' :
+            '../src/home'
+        );
+    </script>
 </head>
 <body>
     <div id="icon_a"></div>
     <div id="icon_b"></div>
-
-    <script src="../js/lib/seajs/2.2.0/sea.js" id="seajsnode"></script>
-    <script>
-        if (window.location.href.indexOf('?dev') > 0) {
-            seajs.config({
-                preload: ['../src/home.css', 'log'],
-                base: '../src',
-                debug: true,
-                map: [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=20140728']],
-                alias: {
-                    log: '../js/util/seajs-log/1.0.1/seajs-log',
-                }
-            });
-            seajs.use('home');
-        } else {
-            seajs.config({
-                preload: ['../css/home.css', 'log'],
-                base: '../js',
-                debug: false,
-                map: [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=20140728']],
-                alias: {
-                    log: 'util/seajs-log/1.0.1/seajs-log',
-                }
-            });
-            seajs.use('app/demo/1.0.0/home');
-        }
-    </script>
 </body>
 </html>

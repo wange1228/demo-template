@@ -47,7 +47,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'dist',
                 src: '*.js',
-                dest: 'js/app/demo/1.0.0',
+                dest: 'js/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>',
                 filter: 'isFile'
             }
         },
